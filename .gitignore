@@ -1,0 +1,8 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# vscode IDE config
+.vscode
+
+# source code
+confidential_info.1.py
