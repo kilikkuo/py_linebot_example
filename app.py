@@ -2,6 +2,7 @@ from flask import Flask, request, current_app
 from pprint import pprint
 from inforsender import start_infosender, stop_infosender
 from classinfocrawler import get_classinfo_in_coming_week, start_infocrawler, stop_infocrawler
+from receivedmsgverifier import message_authentication
 import json
 
 app = Flask(__name__)
@@ -12,6 +13,15 @@ def index():
 
 @app.route('/callback', methods=['POST'])
 def callback(*args, **argd):
+    # Verify that the msg is from Line platform
+    sig = request.headers.get('X-Line-Signature', '')
+    # Get the request body
+    body = request.get_data(as_text=True)
+
+    verified_ok = message_authentication(body, sig)
+    if not verified_ok:
+        return ''
+
     json_line = request.get_json()
     if not json_line:
         return ''

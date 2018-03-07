@@ -32,7 +32,8 @@ zumbaInfo = ZumbaAccountInfo()
 
 class LineBotInfo(object):
     def __init__(self):
-        self.__token = 
+        self.__token = 'YOUR_CHANNEL_TOKEN'
+        self.__secret = 'YOUR_CHANNEL_SECRET'
         self.__test_user_ids = []
         self.__target_user_ids = []
 
@@ -44,5 +45,8 @@ class LineBotInfo(object):
     
     def target_user_ids(self):
         return self.__target_user_ids
+
+    def secret(self):
+        return self.__secret
 
 botInfo = LineBotInfo()
